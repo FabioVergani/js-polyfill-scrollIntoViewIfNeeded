@@ -1,0 +1,25 @@
+	if(!o.scrollIntoViewIfNeededz) {
+	 o.scrollIntoViewIfNeededz = function(v){
+		var k=arguments.length===0?true:!!v, t=this, e=t.parentNode, cs=window.getComputedStyle(e,null),
+		parentBorderTopWidth=parseInt(cs.getPropertyValue('border-top-width')),
+		parentBorderLeftWidth=parseInt(cs.getPropertyValue('border-left-width'));
+		ot=t.offsetTop,
+		et=e.offsetTop,
+		st=e.scrollTop,
+		th=t.clientHeight,
+		tw=t.clientWidth,
+		eh=e.clientHeight,
+		ew=e.clientWidth,
+		overTop=ot - et < st,
+		overBottom=ot - et + th - parentBorderTopWidth > st + eh,
+		tl=t.offsetLeft,
+		el=e.offsetLeft,
+		sl=e.scrollLeft,
+		overLeft=tl - el < sl,
+		overRight=tl - el + tw - parentBorderLeftWidth > sl + ew,
+		alignWithTop=overTop && !overBottom;
+		if(k&&(overTop||overBottom)){e.scrollTop=ot - et - eh / 2 - parentBorderTopWidth + th / 2;};
+		if(k&&(overLeft||overRight)){sl=tl - el - ew / 2 - parentBorderLeftWidth + tw / 2;};
+		if(!k&&(overTop||(overBottom||(overLeft||overRight)))){t.scrollIntoView(alignWithTop);};
+	 };
+	};
